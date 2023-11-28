@@ -1,4 +1,4 @@
-package assign10x;
+package assign10;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,14 +77,15 @@ class BinaryMaxHeapTest {
         integerHeap.add(5);
         integerHeap.add(15);
 
-        Integer[] expectedArray = {15, 10, 5 };
-        assertArrayEquals(expectedArray, integerHeap.toArray());
+        Integer[] expectedArray = {15, 5, 10 };
+        Object[] actualArray = integerHeap.toArray();
+        assertArrayEquals(expectedArray, actualArray);
 
         stringHeap.add("apple");
         stringHeap.add("banana");
         stringHeap.add("orange");
 
-        String[] expectedStringArray = { null, "orange", "banana", "apple" };
+        String[] expectedStringArray = {"apple", "banana", "orange" };
         assertArrayEquals(expectedStringArray, stringHeap.toArray());
     }
 
