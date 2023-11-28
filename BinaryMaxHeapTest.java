@@ -17,6 +17,7 @@ class BinaryMaxHeapTest {
     private BinaryMaxHeap<String> stringHeap;
     private BinaryMaxHeap<Integer> listIntHeap;
     private BinaryMaxHeap<Integer> listIntHeapComparator;
+    private ArrayList<Integer> items;
 
     
 
@@ -24,7 +25,7 @@ class BinaryMaxHeapTest {
 	void setUp() throws Exception {
 		integerHeap = new BinaryMaxHeap<>();
         stringHeap = new BinaryMaxHeap<>(Comparator.reverseOrder());
-        ArrayList<Integer> items = new ArrayList<>();
+        items = new ArrayList<>();
         items.add(1);
         items.add(2);
         items.add(3);
@@ -114,9 +115,17 @@ class BinaryMaxHeapTest {
         stringHeap.add("apple");
         stringHeap.add("banana");
         stringHeap.add("orange");
+        
 
         String[] expectedStringArray = {"apple", "banana", "orange" };
         assertArrayEquals(expectedStringArray, stringHeap.toArray());
+        
+        Integer[] expectedListArray = {5, 4, 3, 1, 2};
+        Integer[] expectedListComparatorArray = {1, 2, 3, 4, 5};
+        
+        assertArrayEquals(expectedListArray, listIntHeap.toArray());
+        assertArrayEquals(expectedListComparatorArray, listIntHeapComparator.toArray());
+
     }
 
 	@Test

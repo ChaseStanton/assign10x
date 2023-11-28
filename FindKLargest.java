@@ -1,4 +1,4 @@
-package assign10x;
+package assign10;
 
 import java.util.ArrayList;
 import java.util.Collections;
