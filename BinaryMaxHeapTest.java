@@ -170,9 +170,10 @@ class BinaryMaxHeapTest {
         nullHeap.add(null);
         nullHeap.add(15);
 
-        assertNull(nullHeap.extractMax());
-        assertEquals(10, (int) nullHeap.extractMax());
         assertEquals(15, (int) nullHeap.extractMax());
+        assertEquals(10, (int) nullHeap.extractMax());
+        assertNull(nullHeap.extractMax());
+
     }
 
     @Test
