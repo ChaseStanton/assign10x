@@ -177,7 +177,9 @@ class BinaryMaxHeapTest {
     @Test
     public void testExtractMaxOnEmptyHeap() {
         assertTrue(integerHeap.isEmpty());
-        integerHeap.extractMax(); // Should throw NoSuchElementException
+        assertThrows(NoSuchElementException.class, () -> {
+            integerHeap.extractMax();
+        });
     }
 
 
