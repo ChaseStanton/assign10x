@@ -2,6 +2,7 @@ package assign10;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,11 +15,37 @@ import org.junit.jupiter.api.Test;
 class BinaryMaxHeapTest {
 	private BinaryMaxHeap<Integer> integerHeap;
     private BinaryMaxHeap<String> stringHeap;
+    private BinaryMaxHeap<Integer> listIntHeap;
+    private BinaryMaxHeap<Integer> listIntHeapComparator;
+
+    
 
 	@BeforeEach
 	void setUp() throws Exception {
 		integerHeap = new BinaryMaxHeap<>();
         stringHeap = new BinaryMaxHeap<>(Comparator.reverseOrder());
+        ArrayList<Integer> items = new ArrayList<>();
+        items.add(1);
+        items.add(2);
+        items.add(3);
+        items.add(4);
+        items.add(5);
+        listIntHeap = new BinaryMaxHeap<>(items);
+        listIntHeapComparator = new BinaryMaxHeap<>(items, Comparator.reverseOrder());
+
+	}
+	
+	@Test
+	public void listComparatorConstructor() {
+		assertEquals(5, listIntHeap.size());
+		assertEquals(5, listIntHeapComparator.size());
+		
+		assertEquals(5, listIntHeap.extractMax());
+		assertEquals(1, listIntHeapComparator.extractMax());
+
+		assertEquals(4, listIntHeap.peek());
+		assertEquals(2, listIntHeapComparator.peek());
+
 	}
 
 	@Test
