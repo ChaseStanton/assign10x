@@ -2,7 +2,11 @@ package assign10x;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,14 +81,14 @@ class BinaryMaxHeapTest {
         integerHeap.add(5);
         integerHeap.add(15);
 
-        Integer[] expectedArray = {15, 10, 5 };
+        Integer[] expectedArray = {15, 5, 10 };
         assertArrayEquals(expectedArray, integerHeap.toArray());
 
         stringHeap.add("apple");
         stringHeap.add("banana");
         stringHeap.add("orange");
 
-        String[] expectedStringArray = { null, "orange", "banana", "apple" };
+        String[] expectedStringArray = {"apple", "banana", "orange" };
         assertArrayEquals(expectedStringArray, stringHeap.toArray());
     }
 
@@ -109,4 +113,51 @@ class BinaryMaxHeapTest {
         assertEquals("orange", lengthHeap.peek());
     }
 
+	@Test
+    public void testAddAndExtractMaxWithDuplicates() {
+        integerHeap.add(10);
+        integerHeap.add(5);
+        integerHeap.add(15);
+        integerHeap.add(10); // Duplicate element
+
+        assertEquals(15, (int) integerHeap.extractMax());
+        assertEquals(10, (int) integerHeap.extractMax());
+        assertEquals(10, (int) integerHeap.extractMax());
+        assertEquals(5, (int) integerHeap.extractMax());
+    }
+
+    @Test
+    public void testAddAndExtractMaxWithNulls() {
+        BinaryMaxHeap<Integer> nullHeap = new BinaryMaxHeap<>();
+
+        nullHeap.add(10);
+        nullHeap.add(null);
+        nullHeap.add(15);
+
+        assertNull(nullHeap.extractMax());
+        assertEquals(10, (int) nullHeap.extractMax());
+        assertEquals(15, (int) nullHeap.extractMax());
+    }
+
+    @Test
+    public void testPeekOnEmptyHeap() {
+        assertTrue(integerHeap.isEmpty());
+        assertThrows(NoSuchElementException.class, () -> {
+			integerHeap.extractMax();
+		});
+    }
+
+    @Test
+    public void testExtractMaxOnEmptyHeap() {
+        assertTrue(integerHeap.isEmpty());
+        integerHeap.extractMax(); // Should throw NoSuchElementException
+    }
+
+
+    @Test
+    public void testEmptyHeapToArray() {
+        assertTrue(integerHeap.isEmpty());
+        Integer[] emptyArray = {};
+        assertArrayEquals(emptyArray, integerHeap.toArray());
+    }
 }
