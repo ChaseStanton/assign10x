@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
  * equal to its children.
  *
  * @param <E> the type of elements in the heap
+ * 
+ * @author Reece Kalmar and Chase Stanton
+ * @version 11/28/2023
  */
 public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 	private E[] backing;
@@ -28,8 +31,8 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 	}
 
 	/**
-	 * Constructs an empty binary max heap with a specified custom comparator and
-	 * an initial capacity of 16.
+	 * Constructs an empty binary max heap with a specified custom comparator and an
+	 * initial capacity of 16.
 	 *
 	 * @param custom the comparator used to order the elements, or null for natural
 	 *               ordering
@@ -65,8 +68,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 
 	/**
 	 * Constructs a binary max heap from a list of elements using a custom
-	 * comparator.
-	 * The elements are added in the order they appear in the list.
+	 * comparator. The elements are added in the order they appear in the list.
 	 *
 	 * @param list   the list of elements
 	 * @param custom the comparator used to order the elements, or null for natural
@@ -118,8 +120,8 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 			}
 			if (maxIndex != index) {
 				E temp = backing[index];
-				backing[index] = backing[maxIndex];
-				backing[maxIndex] = temp;
+				backing[index] = backing[maxIndex]; // Swap elements
+				backing[maxIndex] = temp; //
 				index = maxIndex;
 			} else {
 				break;
@@ -136,7 +138,7 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 	public void add(E item) {
 		if (size >= backing.length - 1) {
 			@SuppressWarnings("unchecked")
-			E[] temp = (E[]) new Object[backing.length * 2];
+			E[] temp = (E[]) new Object[backing.length * 2]; // Increases the size of backing array as needed
 			for (int i = 1; i <= size; i++) {
 				temp[i] = backing[i];
 			}
@@ -181,7 +183,8 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 		if (custom != null) {
 			return custom.compare((E) backing[a], (E) backing[b]);
 		} else {
-			Comparable<? super E> comparableA = (Comparable<? super E>) backing[a];
+			Comparable<? super E> comparableA = (Comparable<? super E>) backing[a]; // Creates comparable objects for
+																					// both parameters
 			Comparable<? super E> comparableB = (Comparable<? super E>) backing[b];
 
 			if (comparableA != null && comparableB != null) {
@@ -266,8 +269,8 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 	}
 
 	/**
-	 * Returns an array containing all elements in the binary max heap. The order
-	 * of the elements in the array corresponds to their order in the backing array,
+	 * Returns an array containing all elements in the binary max heap. The order of
+	 * the elements in the array corresponds to their order in the backing array,
 	 * not their priority in the heap.
 	 *
 	 * @return an array containing all elements in the heap
@@ -277,7 +280,8 @@ public class BinaryMaxHeap<E> implements PriorityQueue<E> {
 		@SuppressWarnings("unchecked")
 		E[] arr = (E[]) new Object[size];
 		for (int i = 0; i < size; i++) {
-			arr[i] = backing[i + 1];
+			arr[i] = backing[i + 1]; // Copys the backing array by shifting elements one to the left since the root
+										// is stored at 1
 		}
 		return arr;
 	}
